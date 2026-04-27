@@ -1,0 +1,171 @@
+:root {
+    background-image
+    --primary-bg: linear-gradient(135deg, #a7f3f0 0%, #ffffff 50%, #f3e8ff 100%);
+    --accent-teal: #2dbab5;
+    --accent-purple: #6c5ce7;
+    --text-main: #333;
+}
+.background-container {
+    background-image: url('Aether_Background.png'); /* Replace with actual image path */
+    background-size: cover; /* Ensures image covers the entire container */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: 100vh; /* Set to the full viewport height */
+    width: 100%; /* Ensures full width */
+}
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+/* Header & Nav */
+header {
+    padding: 20px 80px;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--accent-teal);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+    .nav-links a {
+        text-decoration: none;
+        color: #555;
+        font-size: 14px;
+    }
+
+.btn-touch {
+    background: var(--accent-teal);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+/* Hero Section */
+.hero {
+    display: flex;
+    align-items: center;
+    padding: 60px 80px;
+    min-height: 70vh;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+    .hero-content h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #2c3e50;
+    }
+
+    .hero-content p {
+        font-size: 18px;
+        color: #666;
+        max-width: 450px;
+        margin-bottom: 30px;
+    }
+
+.hero-btns {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-primary {
+    background: var(--accent-purple);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+}
+
+.btn-secondary {
+    background: white;
+    color: #888;
+    border: 1px solid #ddd;
+    padding: 12px 30px;
+    border-radius: 25px;
+}
+
+/* Glassmorphism Icon Styling */
+.hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.abstract-a {
+    font-size: 200px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
+}
+
+/* Services Section */
+.services {
+    text-align: center;
+    padding: 80px;
+}
+
+.service-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+}
+
+.purple {
+    background: #e0d7ff;
+}
+
+.teal {
+    background: #d1f7f5;
+}
+
+.orange {
+    background: #fff1d7;
+}
+
+.blue {
+    background: #d7e8ff;
+}

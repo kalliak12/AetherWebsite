@@ -1,0 +1,565 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether - Premium Digital Solutions</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CINEMATIC LUXURY PRELOADER --- */
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .preloader-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Η εικόνα του λογοτύπου σου */
+        .premium-logo-img {
+            width: 250px;
+            height: auto;
+            opacity: 0;
+            transform: scale(0.9);
+            filter: blur(20px) brightness(1.5);
+            animation: luxuryReveal 2s cubic-bezier(0.2, 0, 0.2, 1) forwards;
+            /* Το μυστικό για ομαλή κίνηση χωρίς τρέμουλο */
+            backface-visibility: hidden;
+            will-change: transform, opacity, filter;
+        }
+
+        /* Το εφέ λάμψης που περνάει πάνω από το logo */
+        .shimmer-layer {
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent);
+            transform: skewX(-20deg);
+            animation: shimmerEffect 1.5s ease-in-out 1s forwards;
+        }
+
+        .brand-name-luxury {
+            margin-top: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            letter-spacing: 15px;
+            text-transform: uppercase;
+            color: #4ab3d0;
+            opacity: 0;
+            animation: textReveal 1.5s cubic-bezier(0.2, 0, 0.2, 1) 1.2s forwards;
+            backface-visibility: hidden;
+            will-change: opacity, letter-spacing;
+        }
+
+        /* Η "Σπίθα" */
+        .magic-spark {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #ffd700;
+            border-radius: 50%;
+            box-shadow: 0 0 20px #ffd700, 0 0 40px #4ab3d0;
+            z-index: 100;
+            opacity: 0;
+            animation: sparkOrbit 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        /* ANIMATIONS */
+
+        @keyframes luxuryReveal {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+                filter: blur(20px) brightness(1.5);
+            }
+
+            50% {
+                opacity: 1;
+                filter: blur(5px) brightness(1.2);
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1);
+                filter: blur(0) brightness(1);
+            }
+        }
+
+        @keyframes textReveal {
+            0% {
+                opacity: 0;
+                filter: blur(10px);
+                letter-spacing: 5px;
+            }
+
+            100% {
+                opacity: 1;
+                filter: blur(0);
+                letter-spacing: 15px;
+            }
+        }
+
+        @keyframes sparkOrbit {
+            0% {
+                opacity: 0;
+                transform: translate(-100px, 50px) scale(0.5);
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translate(100px, -50px) scale(1.2);
+            }
+        }
+
+        @keyframes shimmerEffect {
+            100% {
+                left: 200%;
+            }
+        }
+
+        .preloader-hidden {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            /* Σταματάμε όλα τα εσωτερικά animations μόλις ξεκινήσει η έξοδος */
+            pointer-events: none;
+        }
+        /* 1. RESET & GLOBAL STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border-radius: 0 !important;
+        }
+
+        body, html {
+            width: 100%;
+            background-color: #fdfbfe;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* 2. HEADER & NAVIGATION */
+        /* The White Banner Wrapper */
+        .navbar-banner {
+            position: fixed; /* Keeps it at the top while scrolling */
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ffffff; /* The white banner */
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05); /* Subtle shadow for depth */
+            z-index: 1000; /* Keeps it above the hero image */
+            height: 90px; /* Fixed height for the banner */
+        }
+
+        /* Centering Container */
+        /* This forces the split between left and right */
+        .nav-container {
+            max-width: 100%; /* Allow it to use the full width of the bar */
+            height: 100%;
+            margin: 0; /* Remove auto centering */
+            padding: 0 8%; /* THIS MUST MATCH THE HERO PADDING BELOW */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* This keeps the links and button together on the right */
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Ensure logo-wrapper doesn't have any 'margin: auto' */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-left: 0; /* Force it to the hard left edge of the padding */
+        }
+
+        /* Ensure the nav-links don't have extra margins */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+        .logo-img {
+            height: 60px; /* Adjust based on your logo shape */
+            width: auto;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: #4ab3d0; /* Darker text for the white background */
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        /* Nav Links Styling */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 35px;
+        }
+
+            .nav-links a {
+                text-decoration: none;
+                color: #555; /* Neutral grey for readability */
+                font-size: 15px;
+                font-weight: 600;
+                transition: color 0.3s ease;
+            }
+
+                .nav-links a:hover {
+                    color: #6c5ce7; /* Highlights purple on hover */
+                }
+
+        /* Button override for the white banner */
+        .btn-touch {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px !important;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Adjustment: Since the navbar is now 'fixed' and white, 
+   we need to push the Hero content down so it doesn't hide behind the bar */
+        .full-page-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            padding-left: 8%; /* THIS MATCHES THE NAV PADDING */
+            display: flex;
+            align-items: flex-start;
+            padding-top: calc(25vh + 90px);
+        }
+
+        .btn-touch {
+            background: #6c5ce7;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px !important;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* 3. HERO SECTION */
+        .full-page-hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            background-image: url('Aether.bgimg_final.png');
+            background-size: 100% auto;
+            background-position: top center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: flex-start;
+            padding-top: 25vh;
+            padding-left: 8%;
+        }
+
+        .text-block {
+            z-index: 10;
+            color: #ffffff;
+            max-width: 900px;
+        }
+
+            .text-block h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: 100px;
+                line-height: 1;
+                margin-bottom: 20px;
+                text-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .text-block p {
+                font-size: 22px;
+                max-width: 550px;
+                margin-bottom: 40px;
+                line-height: 1.5;
+                opacity: 0.95;
+            }
+
+        .btn-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            border-radius: 50px !important;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        .purple-btn {
+            background: #6c5ce7;
+            color: white;
+        }
+
+        .white-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 2px solid white;
+            backdrop-filter: blur(10px);
+        }
+
+        /* 4. UPDATED SERVICES SECTION */
+        .services {
+            background: #fdfbfe;
+         padding: 0 8% 120px 8%; /* Top padding is set to 0 here */
+    text-align: center;
+    margin-top: -1px; /* Optional: A tiny nudge to prevent 'sub-pixel' gaps */
+}
+
+            .services h2 {
+                margin-top: 0;
+                padding-top: 60px; /* Adjust this to control the space inside the white area */
+                font-family: 'Playfair Display', serif;
+                font-size: 56px;
+                margin-bottom: 80px;
+                color: #2c3e50;
+            }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            border-radius: 30px !important; /* Aristocratic Rounded Corners */
+            padding: 60px 30px;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+            .service-card:hover {
+                transform: translateY(-15px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            }
+
+        /* Image Placeholder for Icons */
+        .card-icon-img {
+            width: 120px; /* Width must match height */
+            height: 120px; /* Height must match width */
+            margin-bottom: 30px;
+            /* This creates the perfect circle */
+            border-radius: 50% !important;
+            /* This ensures your icon doesn't get stretched or squished inside the circle */
+            object-fit: cover;
+            /* Optional: adds a nice clean border or shadow to define the circle */
+            border: 4px solid #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .service-card p {
+            font-family: 'Inter', sans-serif;
+            font-size: 17px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        /* Pastel backgrounds assigned to the whole card */
+        .bg-purple {
+            background-color: #efe9ff;
+        }
+
+        .bg-teal {
+            background-color: #e0fbf9;
+        }
+
+        .bg-orange {
+            background-color: #fff5e6;
+        }
+
+        .bg-blue {
+            background-color: #e6f2ff;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .text-block h1 {
+                font-size: 70px;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+        .credits {
+            background-color: #6c5ce7;
+        }
+            .credits p {
+                font-family: 'Playfair Display', serif;
+                font-size: 12px;
+                color: white;
+                line-height: 1.6;
+                height: 2vh; /* Set a height so you can see the vertical centering */
+                display: flex;
+                justify-content: center; /* Centers horizontally */
+                align-items: center; /* Centers vertically */
+                text-align: center; /* Ensures multi-line text is centered */
+            }
+            }
+    </style>
+</head>
+<body>
+    <div id="preloader">
+        <div class="preloader-container">
+            <div class="magic-spark"></div>
+
+            <div class="logo-wrapper-luxury">
+                <img src="Aether_Logo.png" alt="Aether Logo" class="premium-logo-img">
+                <div class="shimmer-layer"></div>
+            </div>
+
+            <div class="brand-name-luxury">Aether</div>
+        </div>
+        <div class="ethereal-bg"></div>
+    </div>
+
+    <header class="navbar-banner">
+        <div class="nav-container">
+
+            <div class="logo-wrapper">
+                <img src="Aether_logo.png" alt="Logo" class="logo-img">
+                <a href="#" class="logo-text">Aether</a>
+            </div>
+
+            <div class="nav-right-group">
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Portfolio</a></li>
+                </ul>
+                <button class="btn-touch">Get In Touch</button>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="full-page-hero">
+        <div class="text-block">
+            <h1>Elevating Digital<br>Experiences</h1>
+            <p>Turning ideas into seamless digital realities with custom web and app solutions.</p>
+            <div class="btn-container">
+                <a href="#" class="btn purple-btn">Our Services</a>
+                <a href="#" class="btn white-btn">View Portfolio</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="services">
+        <h2>Our Services</h2>
+        <div class="service-grid">
+
+            <div class="service-card bg-purple">
+                <img src="web-icon.png" alt="Web Dev Icon" class="card-icon-img">
+                <h3>Web Development</h3>
+                <p>Tailored solutions for your digital presence.</p>
+            </div>
+
+            <div class="service-card bg-teal">
+                <img src="mobile-icon.png" alt="Mobile Apps Icon" class="card-icon-img">
+                <h3>Mobile Apps</h3>
+                <p>Creating seamless mobile experiences.</p>
+            </div>
+
+            <div class="service-card bg-orange">
+                <img src="design-icon.png" alt="UI/UX Icon" class="card-icon-img">
+                <h3>UI/UX Design</h3>
+                <p>User-centric designs that convert.</p>
+            </div>
+
+            <div class="service-card bg-blue">
+                <img src="strategy-icon.png" alt="Strategy Icon" class="card-icon-img">
+                <h3>Digital Strategy</h3>
+                <p>Growing your brand in the digital age.</p>
+            </div>
+
+        </div>
+    </section>
+    <section>
+        <div class="credits">
+            <p>© 2026 Aether by Green & Digital. All rights reserved.</p>
+        </div>
+    </section>
+    <svg style="width:0;height:0;position:absolute;">
+        <defs>
+            <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#4ab3d0;stop-opacity:1" />
+                <stop offset="100%" style="stop-color:#6c5ce7;stop-opacity:1" />
+            </linearGradient>
+        </defs>
+    </svg>
+
+    <script>
+        window.addEventListener("load", function () {
+            const loader = document.getElementById("preloader");
+
+            // Περιμένουμε να τελειώσουν τα animations
+            setTimeout(function () {
+                // Προσθέτουμε την κλάση για το ομαλό σβήσιμο
+                loader.classList.add("preloader-hidden");
+
+                // Προαιρετικά: Αφαιρούμε τελείως το στοιχείο από το DOM μετά το transition
+                setTimeout(() => {
+                    loader.style.display = "none";
+                }, 1000); // 1 δευτερόλεπτο (όσο και το transition στο CSS)
+            }, 2500);
+        });
+    </script>
+</body>
+</html>
